@@ -68,7 +68,11 @@ function App() {
                             <TableCell></TableCell>
                           </TableRow>
                         </TableHead>
-                        <TableManager players={teamsObj.players} />
+                        <TableManager
+                          key={teamsObj.team_name}
+                          players={teamsObj.players}
+                          teamName={teamsObj.team_name}
+                        />
                       </Table>
                     </TableContainer>
                   ))}

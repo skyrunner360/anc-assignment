@@ -16,13 +16,22 @@ export const mainSlice = createSlice({
             state.apiData = [...action.payload.map(el=>({...el,teams: el.teams.map(e=>({...e,players:e.players.map(elem=>({...elem,id:uuidv4()}))}))}))]
              
         },
-        addPlayer: (state,action:PayloadAction<playersType>)=>{
-             state.apiData = [...state.apiData.map(el=>({...el,teams: el.teams.map(e=>({...e,players:[{...action.payload,id:uuidv4()},...e.players]}))}))]
+        addPlayer: (state,action:PayloadAction<playersType & {teamName:string}>)=>{
+             state.apiData = [...state.apiData.map(el=>({...el,teams: 
+                el.teams.map(e=>{
+                    if(e.team_name===action.payload.teamName){
+                        return {...e,players:[{age:action.payload.age,id:uuidv4(),name:action.payload.name},...e.players]}
+                    }
+                    else{
+                        return {...e}
+                    }
+            })
+            
+            }))]
             },
             updatePlayerData:(state,action:PayloadAction<{id:number,age?:number | null,name?:string | null}>)=>{
             state.apiData = [...state.apiData.map(el=>({...el,teams: el.teams.map(e=>{
                 const elemIndex = e.players.findIndex(()=>action.payload.id)
-                console.log("elem index",action.payload.id)
                 if(action.payload.name) 
                 {
 

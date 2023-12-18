@@ -3,20 +3,20 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
-import { playersType } from "../types/fetchDataType";
+import { addPlayer } from "../store/mainSlice";
 import { useAppDispatch } from "../store/store";
-import { addPlayer, updatePlayerData } from "../store/mainSlice";
+import { playersType } from "../types/fetchDataType";
 import DataRow from "./DataRow";
 
-const TableManager = ({ players }: { players: playersType[] }) => {
+const TableManager = ({
+  players,
+  teamName,
+}: {
+  players: playersType[];
+  teamName: string;
+}) => {
   const [newName, setNewName] = useState<null | string>("");
   const [newAge, setNewAge] = useState<null | string>("");
-  const [activePlayerId, setActivePlayerId] = useState<number | undefined>(0);
-  const [activeData, setActiveData] = useState<playersType>({
-    name: "",
-    age: 0,
-    id: 0,
-  });
   const dispatch = useAppDispatch();
 
   return (
@@ -54,7 +54,11 @@ const TableManager = ({ players }: { players: playersType[] }) => {
               size="small"
               onClick={() => {
                 dispatch(
-                  addPlayer({ name: newName, age: parseInt(String(newAge)) })
+                  addPlayer({
+                    name: newName,
+                    age: parseInt(String(newAge)),
+                    teamName,
+                  })
                 );
                 setNewAge("");
                 setNewName("");
