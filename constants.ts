@@ -10,3 +10,5 @@ export const TOAST_CONFIG:ToastOptions ={
     progress: undefined,
     theme: "colored",
 }
+
+export const NUMBER_REGEX = /^[0-9]*$/gm

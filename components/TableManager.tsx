@@ -8,7 +8,7 @@ import { useAppDispatch } from "../store/store";
 import { playersType } from "../types/fetchDataType";
 import DataRow from "./DataRow";
 import { toast } from "react-toastify";
-import { TOAST_CONFIG } from "../constants";
+import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
 
 const TableManager = ({
   players,
@@ -38,7 +38,7 @@ const TableManager = ({
               placeholder="Enter Player Name"
               size="small"
               value={newName}
-              onChange={(e) => setNewName(e.target.value)}
+              onChange={({ target: { value } }) => setNewName(value)}
             />
           </TableCell>
           <TableCell>
@@ -48,23 +48,34 @@ const TableManager = ({
               placeholder="Enter Player Age"
               size="small"
               value={newAge}
-              onChange={(e) => setNewAge(e.target.value)}
+              onChange={({ target: { value } }) => {
+                if (value.match(NUMBER_REGEX)) {
+                  setNewAge(value.trim());
+                }
+              }}
             />
           </TableCell>
           <TableCell>
             <Button
               size="small"
               onClick={() => {
-                dispatch(
-                  addPlayer({
-                    name: newName,
-                    age: parseInt(String(newAge)),
-                    teamName,
-                  })
-                );
-                setNewAge("");
-                setNewName("");
-                toast.success("New Player Added Successfully!", TOAST_CONFIG);
+                if (!newName?.trim() || !newAge?.trim()) {
+                  toast.error(
+                    "Player name and age are required!",
+                    TOAST_CONFIG
+                  );
+                } else {
+                  dispatch(
+                    addPlayer({
+                      name: newName,
+                      age: parseInt(String(newAge)),
+                      teamName,
+                    })
+                  );
+                  setNewAge("");
+                  setNewName("");
+                  toast.success("New Player Added Successfully!", TOAST_CONFIG);
+                }
               }}
             >
               Add

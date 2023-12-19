@@ -6,7 +6,7 @@ import { updatePlayerData } from "../store/mainSlice";
 import { useAppDispatch } from "../store/store";
 import { playersType } from "../types/fetchDataType";
 import { toast } from "react-toastify";
-import { TOAST_CONFIG } from "../constants";
+import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
 
 const DataRow = (playerObj: playersType) => {
   const [playerName, setPlayerName] = useState(playerObj.name || "");
@@ -31,7 +31,9 @@ const DataRow = (playerObj: playersType) => {
             size="small"
             value={playerAge}
             onChange={({ target: { value } }) => {
-              setPlayerAge(value);
+              if (value.match(NUMBER_REGEX)) {
+                setPlayerAge(value.trim());
+              }
             }}
           />
         </TableCell>
@@ -39,14 +41,18 @@ const DataRow = (playerObj: playersType) => {
           <Button
             size="small"
             onClick={() => {
-              dispatch(
-                updatePlayerData({
-                  age: parseInt(String(playerAge)),
-                  id: parseInt(String(playerObj.id)),
-                  name: playerName,
-                })
-              );
-              toast.success("Player Details Saved!", TOAST_CONFIG);
+              if (!playerName.trim() || !playerAge) {
+                toast.error("Player name and age are required!", TOAST_CONFIG);
+              } else {
+                dispatch(
+                  updatePlayerData({
+                    age: parseInt(String(playerAge)),
+                    id: parseInt(String(playerObj.id)),
+                    name: playerName,
+                  })
+                );
+                toast.success("Player Details Saved!", TOAST_CONFIG);
+              }
             }}
           >
             Save
