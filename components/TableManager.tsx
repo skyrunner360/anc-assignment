@@ -7,6 +7,8 @@ import { addPlayer } from "../store/mainSlice";
 import { useAppDispatch } from "../store/store";
 import { playersType } from "../types/fetchDataType";
 import DataRow from "./DataRow";
+import { toast } from "react-toastify";
+import { TOAST_CONFIG } from "../constants";
 
 const TableManager = ({
   players,
@@ -62,6 +64,7 @@ const TableManager = ({
                 );
                 setNewAge("");
                 setNewName("");
+                toast.success("New Player Added Successfully!", TOAST_CONFIG);
               }}
             >
               Add

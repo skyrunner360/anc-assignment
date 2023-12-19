@@ -1,7 +1,6 @@
-import { createSlice, current } from "@reduxjs/toolkit"
-import { PayloadAction } from "@reduxjs/toolkit"
-import { APIDataType, playersType } from "../types/fetchDataType"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
+import { APIDataType, playersType } from "../types/fetchDataType";
 const initialState:{apiData: APIDataType[],players:playersType[]} = {
     apiData : [],
     players: [],

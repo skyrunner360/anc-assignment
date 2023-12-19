@@ -16,6 +16,8 @@ import TableManager from "../components/TableManager";
 import { populateApiData } from "../store/mainSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -34,6 +36,7 @@ function App() {
   return (
     <>
       <Box>
+        <ToastContainer />
         {!apiData ? (
           <Box>
             <CircularProgress />
