@@ -59,8 +59,11 @@ function App() {
                     </Typography>
                   </Box>
                   {obj.teams.map((teamsObj) => (
-                    <TableContainer component={Paper} sx={{ m: 2 }}>
-                      <Table sx={{ minWidth: 450 }}>
+                    <TableContainer
+                      component={Paper}
+                      sx={{ m: 2, maxHeight: 450 }}
+                    >
+                      <Table sx={{ maxWidth: 500 }} stickyHeader>
                         <TableHead sx={{ backgroundColor: "#CEC3C1" }}>
                           <TableRow selected>
                             <TableCell>
