@@ -1,14 +1,14 @@
+import SaveIcon from "@mui/icons-material/Save";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
+import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
 import { updatePlayerData } from "../store/mainSlice";
 import { useAppDispatch } from "../store/store";
 import { playersType } from "../types/fetchDataType";
-import { toast } from "react-toastify";
-import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
-import SaveIcon from "@mui/icons-material/Save";
 
 const DataRow = (playerObj: playersType) => {
   const [playerName, setPlayerName] = useState(playerObj.name || "");
