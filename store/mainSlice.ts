@@ -28,7 +28,7 @@ export const mainSlice = createSlice({
             
             }))]
             },
-            updatePlayerData:(state,action:PayloadAction<{id:number,age?:number | null,name?:string | null}>)=>{
+            updatePlayerData:(state,action:PayloadAction<{id:string | undefined,age?:number | null,name?:string | null}>)=>{
             state.apiData = [...state.apiData.map(el=>({...el,teams: el.teams.map(e=>{
                 const elemIndex = e.players.findIndex(()=>action.payload.id)
                 if(action.payload.name) 

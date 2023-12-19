@@ -7,6 +7,7 @@ import { useAppDispatch } from "../store/store";
 import { playersType } from "../types/fetchDataType";
 import { toast } from "react-toastify";
 import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
+import SaveIcon from "@mui/icons-material/Save";
 
 const DataRow = (playerObj: playersType) => {
   const [playerName, setPlayerName] = useState(playerObj.name || "");
@@ -40,14 +41,24 @@ const DataRow = (playerObj: playersType) => {
         <TableCell>
           <Button
             size="small"
+            variant="outlined"
+            color="secondary"
+            startIcon={<SaveIcon />}
             onClick={() => {
+              if (
+                playerName === playerObj.name &&
+                playerAge === playerObj.age
+              ) {
+                toast.info("No Changes detected!", TOAST_CONFIG);
+                return;
+              }
               if (!playerName.trim() || !playerAge) {
                 toast.error("Player name and age are required!", TOAST_CONFIG);
               } else {
                 dispatch(
                   updatePlayerData({
                     age: parseInt(String(playerAge)),
-                    id: parseInt(String(playerObj.id)),
+                    id: playerObj.id,
                     name: playerName,
                   })
                 );

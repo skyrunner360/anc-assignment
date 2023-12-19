@@ -1,7 +1,7 @@
 export interface playersType{
     name: string | null;
     age: number | null ;
-    id?: number  
+    id?: string  
 
 }
 export interface teamsType{

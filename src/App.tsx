@@ -46,7 +46,12 @@ function App() {
           <Box>
             <Grid container spacing={2} justifyContent={"center"} gap={2}>
               {apiData.map((obj) => (
-                <Grid item p={6} bgcolor={colorPalette.primary.main}>
+                <Grid
+                  item
+                  p={6}
+                  key={obj.game + +new Date()}
+                  bgcolor={colorPalette.primary.main}
+                >
                   <Box>
                     <Typography
                       fontWeight={700}
@@ -60,6 +65,7 @@ function App() {
                   </Box>
                   {obj.teams.map((teamsObj) => (
                     <TableContainer
+                      key={teamsObj.team_name + +new Date()}
                       component={Paper}
                       sx={{ m: 2, maxHeight: 450 }}
                     >
@@ -75,7 +81,7 @@ function App() {
                           </TableRow>
                         </TableHead>
                         <TableManager
-                          key={teamsObj.team_name}
+                          key={teamsObj.team_name + +new Date()}
                           players={teamsObj.players}
                           teamName={teamsObj.team_name}
                         />

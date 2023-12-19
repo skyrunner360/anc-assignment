@@ -9,6 +9,7 @@ import { playersType } from "../types/fetchDataType";
 import DataRow from "./DataRow";
 import { toast } from "react-toastify";
 import { NUMBER_REGEX, TOAST_CONFIG } from "../constants";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 const TableManager = ({
   players,
@@ -57,7 +58,10 @@ const TableManager = ({
           </TableCell>
           <TableCell>
             <Button
+              variant="contained"
+              color="secondary"
               size="small"
+              startIcon={<PlaylistAddIcon />}
               onClick={() => {
                 if (!newName?.trim() || !newAge?.trim()) {
                   toast.error(
