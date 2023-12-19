@@ -1,33 +1,38 @@
+import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import TableManager from "../components/TableManager";
 import { populateApiData } from "../store/mainSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import "./App.css";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useAppDispatch();
+
+  const theme = useTheme();
+
+  const { palette: colorPalette } = theme;
+
+  const apiData = useAppSelector((state) => state.mainSlice.apiData);
+
   const getData = async () => {
     const data = await fetch(
       "https://mocki.io/v1/b4544a37-0765-405f-baf6-6675845d5a0e"
-    ).then((data) => data.json());
+    ).then((d) => d.json());
     dispatch(populateApiData(data));
   };
-  const theme = useTheme();
-  const { palette: colorPalette } = theme;
-  const apiData = useAppSelector((state) => state.mainSlice.apiData);
+
   useEffect(() => {
     getData();
   }, []);
@@ -35,9 +40,9 @@ function App() {
     <>
       <Box>
         <ToastContainer />
-        {!apiData ? (
+        {apiData.length < 1 ? (
           <Box>
-            <CircularProgress />
+            <CircularProgress color="secondary" />
             <Box textAlign={"center"}>Loading...</Box>
           </Box>
         ) : (
