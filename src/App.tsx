@@ -1,11 +1,9 @@
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  Paper,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";

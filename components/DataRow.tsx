@@ -1,4 +1,5 @@
-import { Button, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
